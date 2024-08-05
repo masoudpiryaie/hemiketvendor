@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "hemiket-vendor",
+    "slug": "hemiket-vendor",
+    "version": "1.0.0",
+    "proxy": "http://172.16.100.49:4000/v1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Your photo library permission description"
+      },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.yohanna.hemiketvendor"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4998f8a9-2bd5-407f-af5e-d6c8ce20f7e2"
+      }
+    }
+  }
+}
