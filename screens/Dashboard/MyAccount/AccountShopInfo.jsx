@@ -18,7 +18,7 @@ const AccountShopInfo = () => {
 
     const fetchCategoryData = async () => {
         try {
-            const response = await axios.post('http://172.16.100.49:4000/category/get', {});
+            const response = await axios.post(BASE_URL + '/category/get', {});
             setCategoryData(response.data.data);
         } catch (error) {
             console.error('Error fetching category data:', error);

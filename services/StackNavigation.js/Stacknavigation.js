@@ -20,8 +20,8 @@ export default function Stacknavigation() {
         component={DrawerNavigation}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen name="AddShop" component={AddShop} /> */}
-      {/* <Stack.Screen name="AddShopPages" component={AddShopPages} /> */}
+      {/* <Stack.Screen name="AddShop" component={AddShop} />
+      <Stack.Screen name="AddShopPages" component={AddShopPages} /> */}
     </Stack.Navigator>
   );
 }

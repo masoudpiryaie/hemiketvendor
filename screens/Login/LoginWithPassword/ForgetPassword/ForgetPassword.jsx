@@ -40,7 +40,7 @@ const ForgetPassword = () => {
     }
     ////////////////////////////////////
     const LoginWithPass = () => {
-        axios.post('http://172.16.100.49:4000/v1/auth', {
+        axios.post(BASE_URL + '/auth', {
             pass: password
         })
     }

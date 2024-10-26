@@ -5,7 +5,7 @@ import { useUserContext } from '../../services/AuthContext/AuthContext'
 import VendorLogo from "../../components/VendorLogo";
 import SignUp from "../SignUp";
 import Svg, { Path } from 'react-native-svg';
-import axios from 'axios';
+// import axios from 'axios';
 import CustomText from '../../components/CustomText/CustomText';
 import LoginWithPassword from "./LoginWithPassword/LoginWithPassword";
 // import HomeScreen from '../Dashboard/HomeScreen2';
@@ -22,6 +22,9 @@ import {
 import Stacknavigation from "../../services/StackNavigation.js/Stacknavigation";
 import HomeScreen from "../Dashboard/HomeScreen";
 import DrawerNavigation from "../../components/DrawerNavigation/DrawerNavigation";
+import axios from "axios";
+// import axios from "../../services/axios/axios";
+// import axios from "../../services/axios/axios";
 // import NavigationScreen from "../../components/BottomTabNavigation/BottomTabNavigation";
 
 
@@ -78,8 +81,8 @@ const LoginWithMobile = () => {
             mobile: phoneNumber,
         })
             .then(response => {
-                console.log('request send', response.data);
-                console.log('passResponse', response.data.pass);
+                console.log('request send');
+                console.log('passResponse2', response.data.pass);
                 // console.log('dataResponse2', response.data);
                 setIsVerificationSent(true)
                 if (response.data && response.data.pass == "2") {
@@ -115,6 +118,7 @@ const LoginWithMobile = () => {
                 Alert.alert("Error", "شبکه خود را چک کنید . کد ارسال نشد");
             });
     };
+
 
 
     const pressBackButton = () => {

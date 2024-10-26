@@ -40,14 +40,13 @@ const HomeScreen = ({ shop, navigation }) => {
     const { isLoggedIn, setIsLoggedIn } = useUserContext()
     const { token } = useUserContext();
 
-
-
+    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODExMSwiaWF0IjoxNzI5NzAwNTAyLCJleHAiOjE3Mjk3ODY5MDJ9.oQIMd9EywPt7VxPoa_1-aizSwi__ZtM8p376wMNp_Zo'
+    console.log('121212121212121212121212', token)
     const toggleDrawer = () => {
         setDrawerOpen(!isDrawerOpen);
     };
     useEffect(() => {
         fetchShopList();
-
     }, []);
     const sortShopList = (sortingOption) => {
         setSelectedOption(sortingOption);
@@ -73,6 +72,7 @@ const HomeScreen = ({ shop, navigation }) => {
     };
 
     const fetchShopList = async () => {
+        console.log('token', token)
         try {
             const response = await axios.post('http://172.16.100.49:4000/v1/shop/getmylist', {}, {
                 headers: {
@@ -83,7 +83,7 @@ const HomeScreen = ({ shop, navigation }) => {
             setShopList(shopDataResponse);
             setFilteredShopList(shopDataResponse);
             setLoading(false);
-            // console.log('shopDataResponse: ', shopDataResponse)
+            console.log('shopDataResponse: ', shopDataResponse)
 
         } catch (error) {
             setError('Error fetching shop list');
@@ -122,7 +122,7 @@ const HomeScreen = ({ shop, navigation }) => {
     }
 
     console.log('shopStatus', shopStatus)
-    console.log('token:  ', token)
+    console.log('tokssssssssssssssssssssen:  ', token)
     return (
         <>
 

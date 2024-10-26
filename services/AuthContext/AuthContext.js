@@ -14,14 +14,20 @@ export const UserProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [verifyCode, setVerifyCode] = useState("");
   const [formError, setFormError] = useState(false);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODExMSwiaWF0IjoxNzI5NzAwNTAyLCJleHAiOjE3Mjk3ODY5MDJ9.oQIMd9EywPt7VxPoa_1-aizSwi__ZtM8p376wMNp_Zo"
+  );
 
-  const saveToken = async (token) => {
-    if (token) {
-      await SecureStore.setItemAsync("userToken", token);
-      setToken(token);
+  const saveToken = async (authToken) => {
+    console.log("tokensaved00000000000000000005555", authToken);
+    if (authToken !== undefined) {
+      await SecureStore.setItemAsync("userToken", authToken);
+      console.log("tokensaved0000000000000000000", authToken);
+      setToken(authToken);
+
       setIsLoggedIn(1);
     }
+    console.log("09909090909090909", token);
   };
 
   const deleteToken = async () => {
@@ -31,6 +37,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const login = (token) => {
+    console.log("logiin111111111111111111111111111111", token);
     saveToken(token);
   };
   const logout = () => {

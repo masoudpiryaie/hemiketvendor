@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 // import CustomHeader from './CustomHeader'; // Import your custom header component
 import { View, Text } from 'react-native'; // Import view and text components
-import HomeScreen from '../../screens/Dashboard/HomeScreen'; // Import your home screen component
+// import HomeScreen from '../../screens/Dashboard/HomeScreen'; // Import your home screen component
 import MyAccount from '../../screens/Dashboard/MyAccount'; // Import your my account screen component
 // import SettingsScreen from '../../screens/Dashboard/'; // Import your settings screen component
 import Icon from '../Icon/Icon';
@@ -30,7 +30,9 @@ import Ticket from '../../screens/Ticket';
 import Turnover from '../../screens/Turnover';
 import Wallet from '../../screens/Wallet';
 import AddShopPages from '../../screens/AddShop/AddShopPages';
+import HomeScreen from '../../screens/Dashboard/HomeScreen';
 import DashBoard from '../../screens/Dashboard/DashBoard';
+// import DashBoard from '../../screens/Dashboard/DashBoard';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -44,6 +46,10 @@ const DrawerNavigation = () => {
         },
       }}
     >
+      {/* <Drawer.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+      /> */}
       <Drawer.Screen
         name="DashBoard"
         component={DashBoard}

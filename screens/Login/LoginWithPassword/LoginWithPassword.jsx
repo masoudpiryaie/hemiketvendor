@@ -8,6 +8,7 @@ import Dashboard from "../../Dashboard/DashBoard";
 import * as SecureStore from 'expo-secure-store';
 import Stacknavigation from "../../../services/StackNavigation.js/Stacknavigation";
 import CustomTouchableOpacity from "../../../components/CustomTouchableOpacity/CustomTouchableOpacity";
+import { useApi } from "../../../services/FetchApi/FetchApi";
 
 
 
@@ -30,6 +31,8 @@ const LoginWithPassword = () => {
     const { login } = useUserContext();
     const [testLog, setTestLog] = useState(0);
     const authTokenRef = useRef();
+    const { token } = useUserContext();
+    const { apiCall, loading } = useApi();
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -56,43 +59,112 @@ const LoginWithPassword = () => {
         console.log('newToken to use: ', newToken)
     }, [newToken])
 
-    const LoginWithPass = async () => {
-        console.log('send sms');
+    const LoginWithPass = () => {
+        console.log('send sms')
         let authToken;
 
-        await axios.post('http://172.16.100.49:4000/v1/auth', {
+
+        axios.post('http://172.16.100.49:4000/v1/auth', {
             mobile: phoneNumber,
             password: password,
+
         })
+
             .then(response => {
-                if (response.data.state === true) {
-                    const authToken = response.data.data.authToken;
-                    console.log('authToken: ', authToken)
-
-
-
-                    // Store the token in the ref for immediate use
-                    authTokenRef.current = authToken;
-
-                    // Call the login function with the token from the ref
-
-                    const ttt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODExMSwiaWF0IjoxNzE1Nzc4MTkwLCJleHAiOjE3MTU4NjQ1OTB9.MKLoXaBQBzFDicMLfh6RcO7CuHd7RNiiTZX5A1 - ue8w';
-                    console.log('authTokenRef.current: ', authTokenRef.current);
-                    setNewToken(ttt)
-
-                    console.log('newToken: ', newToken)
-                    setIsLoggedIn(1);
+                if (response.data.state = true) {
+                    setIsLoggedIn(1)
+                    authToken = response.data.data.authToken;
+                    const token = response.data.data.authToken;
+                    console.log('toooooooooooooooooo', token)
+                    login(token);
+                    // setAuthToken(token);
                 } else {
-                    Alert.alert("رمز وارد شده اشتباه است");
+                    Alert.alert("رمز وارد شده اشتباه است")
                     console.log('رمز اشتباه است');
                 }
+                console.log('response: ', response.data);
+
             })
             .catch(error => {
                 console.log(error);
-                Alert.alert('ارور');
+                Alert.alert('ارور',);
+
             });
     };
+
+    // const LoginWithPass = () => {
+    //     console.log('Attempting to send login request...');
+
+    //     try {
+    //         const response = axios.post('http://172.16.100.49:4000/v1/auth', {
+    //             mobile: phoneNumber,
+    //             password: password,
+    //         });
+
+    //         console.log('response: ', response.data);
+
+    //         if (response.data.state === true) {
+    //             const token = response.data.data.authToken;
+    //             console.log('authToken: ', token);
+
+    //             // Save the token and log in
+    //             setAuthToken(token);
+    //             authTokenRef.current = token;
+    //             login(token);
+
+    //             console.log('authTokenRef.current: ', authTokenRef.current);
+    //             setNewToken(token);
+
+    //             // Note: newToken will be updated in the next render
+    //             setIsLoggedIn(1);
+    //         } else {
+    //             Alert.alert("رمز وارد شده اشتباه است");
+    //             console.log('Incorrect password');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error during login: ', error);
+    //         Alert.alert('ارور', 'An error occurred. Please try again.');
+    //     }
+    // };
+
+    // const LoginWithPass = async () => {
+    //     console.log('send sms');
+    //     let authToken;
+
+    //     await axios.post('http://172.16.100.49:4000/v1/auth', {
+    //         mobile: phoneNumber,
+    //         password: password,
+    //     })
+    //         .then(response => {
+    //             if (response.data.state === true) {
+    //                 const authToken = response.data.data.authToken;
+    //                 console.log('authToken: ', response.data)
+
+    //                 login(authToken)
+
+    //                 // Store the token in the ref for immediate use
+    //                 authTokenRef.current = authToken;
+
+    //                 // Call the login function with the token from the ref
+
+    //                 // const ttt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODExMSwiaWF0IjoxNzE1Nzc4MTkwLCJleHAiOjE3MTU4NjQ1OTB9.MKLoXaBQBzFDicMLfh6RcO7CuHd7RNiiTZX5A1 - ue8w';
+    //                 console.log('authTokenRef.current: ', authTokenRef.current);
+    //                 setNewToken(authToken)
+
+    //                 console.log('newToken: ', newToken)
+    //                 setIsLoggedIn(1);
+    //             } else {
+    //                 Alert.alert("رمز وارد شده اشتباه است");
+    //                 console.log('رمز اشتباه است');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //             Alert.alert('ارور');
+    //         });
+    // };
     console.log('newToken lastUpdate: ', newToken);
+
     const LoginWithVerifyCode = () => {
         // console.log('loginWithVerifyCode:', loginWithVerifyCode);
         console.log('sms send');
@@ -144,6 +216,7 @@ const LoginWithPassword = () => {
             console.log('isLoggedIn*******: ', isLoggedIn)
             console.log('isLoggedI: ', isLoggedIn);
             Alert.alert("کد تایید معتبر است");
+            console.log('first', token)
         }
         else {
             Alert.alert("کد تایید نامعتبر است");

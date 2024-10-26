@@ -14,6 +14,7 @@ import DrawerMenuContent from "../../components/DrawerMenuContent/DrawerMenuCont
 import DrawerNavigation from "../../components/DrawerNavigation/DrawerNavigation";
 import AddShop from "../AddShop/AddShop";
 import { createStackNavigator } from '@react-navigation/stack';
+import Alert from "../../components/Alert/Alert";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -65,6 +66,7 @@ const DashBoard = () => {
 
   return (
     <>
+      <Alert />
       <Tab.Navigator
         screenOptions={{
 
@@ -79,10 +81,10 @@ const DashBoard = () => {
           },
         }}
         initialRouteName="HomeScreen"
-      // tabBarOptions={{
-      //   activeTintColor: "#24caa1",
-      //   labelStyle: styles.labelTab,
-      // }}
+        tabBarOptions={{
+          activeTintColor: "#24caa1",
+          labelStyle: styles.labelTab,
+        }}
       >
         {renderTab("ReportScreen", ReportScreen, "گزارشات", "chartSquare")}
         {renderTab("InquiryScreen", InquiryScreen, "استعلام‌ها", "massageTime")}
